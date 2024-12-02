@@ -1,0 +1,488 @@
+{
+    "Lista confirmaci\u00f3n arranque": [
+        {
+            "E2": {
+                "value": null
+            },
+            "F2": {
+                "value": null
+            },
+            "G2": {
+                "value": null
+            }
+        },
+        {
+            "E3": {
+                "value": "Actuaci\u00f3n"
+            },
+            "F3": {
+                "value": "Verificaci\u00f3n"
+            },
+            "G3": {
+                "value": "Punto de Espera"
+            }
+        },
+        {
+            "E4": {
+                "value": null
+            },
+            "F4": {
+                "value": "BOP.S20_SYS_RDY=1"
+            },
+            "G4": {
+                "value": null
+            }
+        },
+        {
+            "E6": {
+                "value": "NO APLICA"
+            },
+            "F6": {
+                "value": null
+            },
+            "G6": {
+                "value": null
+            }
+        },
+        {
+            "E7": {
+                "value": "G1.L1X=1"
+            },
+            "F7": {
+                "value": null
+            },
+            "G7": {
+                "value": null
+            }
+        },
+        {
+            "E10": {
+                "value": "HRSG.A1.HAD10.CP001XJ01<6  HRSG.A1.HAD50.CP001XJ01<4  HRSG.A1.HAD80.CP001XJ01<1,5  HRSG.A1.HAH10.AA402AUTO=0  HRSG.A1.HAH10.AA402XL01=0  HRSG.A1.HAH15.AA402AUTO=0  HRSG.A1.HAH15.AA402XL01=0 HRSG.A1.HAH15.AA405AUTO=0  HRSG.A1.HAH15.AA405XL01=0  HRSG.A1.LBA10.AA402AUTO=0  HRSG.A1.LBA10.AA402XL01=0  HRSG.A0.LBA13.AA081AUTO=0  HRSG.A0.LBA13.AA081XL01=0  HRSG.A0.LBA35.AA081AUTO=0  HRSG.A0.LBA35.AA081XL01=0  HRSG.A1.LBA50.AA402AUTO=0  HRSG.A1.LBA50.AA402XL01=0  HRSG.A1.HAH50.AA402AUTO=0  HRSG.A1.HAH50.AA402XL01=0  HRSG.A0.LBA62.AA081AUTO=0  HRSG.A0.LBA62.AA081XL01=0  HRSG.A1.HAH80.AA402AUTO=0  HRSG.A1.HAH80.AA402XL01=0  HRSG.A0.LBA43.AA091AUTO=0  HRSG.A0.LBA43.AA091XL01=0  HRSG.A0.LBA45.AA091AUTO=0  HRSG.A0.LBA45.AA091XL01=0  HRSG.A0.LBA49.AA091AUTO=0  HRSG.A0.LBA49.AA091XL01=0 "
+            },
+            "F10": {
+                "value": null
+            },
+            "G10": {
+                "value": null
+            }
+        },
+        {
+            "E12": {
+                "value": null
+            },
+            "F12": {
+                "value": "G1.TNH_V>100   G1.L52BT1/2=1  G1.L52BD1/2=1   G1.L52VG1/2=1"
+            },
+            "G12": {
+                "value": null
+            }
+        },
+        {
+            "E13": {
+                "value": null
+            },
+            "F13": {
+                "value": "G1.L86GLT1_1=1   G1.L86GLT3_1=1"
+            },
+            "G13": {
+                "value": null
+            }
+        },
+        {
+            "E14": {
+                "value": "BOP.A3.LCA54.AA091AUTO=0   BOP.A3.LCA54.AA091XL01=0"
+            },
+            "F14": {
+                "value": null
+            },
+            "G14": {
+                "value": null
+            }
+        },
+        {
+            "E15": {
+                "value": "HRSG.A1.HAD10.AA001XH01=1   HRSG.A1.HAD50.AA001XH01=1   "
+            },
+            "F15": {
+                "value": null
+            },
+            "G15": {
+                "value": null
+            }
+        },
+        {
+            "E16": {
+                "value": null
+            },
+            "F16": {
+                "value": "HRSG.A0.EK_00.HX_SEQCMP=1"
+            },
+            "G16": {
+                "value": null
+            }
+        },
+        {
+            "E17": {
+                "value": null
+            },
+            "F17": {
+                "value": "G1.L28FD=1   G1.TNH_V>2850  G1.L52BN1/2=1   G1.L52TK1/2=1 "
+            },
+            "G17": {
+                "value": null
+            }
+        },
+        {
+            "E18": {
+                "value": "NO APLICA"
+            },
+            "F18": {
+                "value": null
+            },
+            "G18": {
+                "value": null
+            }
+        },
+        {
+            "E19": {
+                "value": "G1.L83S_AUTO=1"
+            },
+            "F19": {
+                "value": null
+            },
+            "G19": {
+                "value": null
+            }
+        },
+        {
+            "E21": {
+                "value": null
+            },
+            "F21": {
+                "value": "EBOP.A1.BAY20.GH001XU01=1"
+            },
+            "G21": {
+                "value": null
+            }
+        },
+        {
+            "E22": {
+                "value": "NO APLICA"
+            },
+            "F22": {
+                "value": null
+            },
+            "G22": {
+                "value": null
+            }
+        },
+        {
+            "E23": {
+                "value": "G1.L43TMON=1"
+            },
+            "F23": {
+                "value": null
+            },
+            "G23": {
+                "value": null
+            }
+        },
+        {
+            "E24": {
+                "value": null
+            },
+            "F24": {
+                "value": "G1.TNR>100,64   G1.L3TMTXC=1"
+            },
+            "G24": {
+                "value": null
+            }
+        },
+        {
+            "E25": {
+                "value": null
+            },
+            "F25": {
+                "value": "G1.L30CY=0"
+            },
+            "G25": {
+                "value": null
+            }
+        },
+        {
+            "E26": {
+                "value": "HRSG.A1.HAD10.CP001XJ01>6  HRSG.A1.HAD50.CP001XJ01>4  HRSG.A1.HAD80.CP001XJ01>1,5  HRSG.A1.HAH10.AA402AUTO=1  HRSG.A1.HAH10.AA402XL01=1  HRSG.A1.HAH15.AA402AUTO=1  HRSG.A1.HAH15.AA402XL01=1 HRSG.A1.HAH15.AA405AUTO=1  HRSG.A1.HAH15.AA405XL01=1  HRSG.A1.LBA10.AA402AUTO=1  HRSG.A1.LBA10.AA402XL01=1  HRSG.A0.LBA13.AA081AUTO=1  HRSG.A0.LBA13.AA081XL01=1  HRSG.A0.LBA35.AA081AUTO=1  HRSG.A0.LBA35.AA081XL01=1  HRSG.A1.LBA50.AA402AUTO=1  HRSG.A1.LBA50.AA402XL01=1  HRSG.A1.HAH50.AA402AUTO=1  HRSG.A1.HAH50.AA402XL01=1  HRSG.A0.LBA62.AA081AUTO=1  HRSG.A0.LBA62.AA081XL01=1  HRSG.A1.HAH80.AA402AUTO=1  HRSG.A1.HAH80.AA402XL01=1  HRSG.A0.LBA43.AA091AUTO=1  HRSG.A0.LBA43.AA091XL01=1  HRSG.A0.LBA45.AA091AUTO=1  HRSG.A0.LBA45.AA091XL01=1  HRSG.A0.LBA49.AA091AUTO=1  HRSG.A0.LBA49.AA091XL01=1 "
+            },
+            "F26": {
+                "value": null
+            },
+            "G26": {
+                "value": null
+            }
+        },
+        {
+            "E27": {
+                "value": null
+            },
+            "F27": {
+                "value": "HRSG.A0.LBA46.AA091XJ01>30  HRSG.A0.LBA40CT001XJ01>190  HRSG.A0.LBA40AA081AUTO=1  HRSG.A0.LBA40AA081XHO1=1"
+            },
+            "G27": {
+                "value": null
+            }
+        },
+        {
+            "E28": {
+                "value": null
+            },
+            "F28": {
+                "value": "S1.L3REL_LOAD=1"
+            },
+            "G28": {
+                "value": null
+            }
+        },
+        {
+            "E29": {
+                "value": "CBOP.A81.CIRCW.2NDPMPSTART=1"
+            },
+            "F29": {
+                "value": null
+            },
+            "G29": {
+                "value": null
+            }
+        },
+        {
+            "E30": {
+                "value": "HRSG.A0.LBA60.AA091XJ01>30  HRSG.A1.LBA50.CT001XJ01>190"
+            },
+            "F30": {
+                "value": null
+            },
+            "G30": {
+                "value": null
+            }
+        },
+        {
+            "E31": {
+                "value": "BOP.A0.QHA02.AC001XD02=1  BOP.A0.QHA01.AC001XD02=1"
+            },
+            "F31": {
+                "value": null
+            },
+            "G31": {
+                "value": null
+            }
+        },
+        {
+            "E33": {
+                "value": null
+            },
+            "F33": {
+                "value": "BOP.A0.QUB44.CQ001XJ01<20  BOP.A0.QUB49.CE002XJ01<0,45"
+            },
+            "G33": {
+                "value": null
+            }
+        },
+        {
+            "E36": {
+                "value": null
+            },
+            "F36": {
+                "value": "S1.LDR_RCMDO=10   S1.L83CLE_HI=1"
+            },
+            "G36": {
+                "value": null
+            }
+        },
+        {
+            "E38": {
+                "value": "S1.L4=1"
+            },
+            "F38": {
+                "value": null
+            },
+            "G38": {
+                "value": null
+            }
+        },
+        {
+            "E39": {
+                "value": "S1.C_MODE.SRAW_VALUE=1  S1.L83HOLD_MAN=1  S1.L43REL_CPB=1"
+            },
+            "F39": {
+                "value": null
+            },
+            "G39": {
+                "value": null
+            }
+        },
+        {
+            "E42": {
+                "value": "NO APLICA"
+            },
+            "F42": {
+                "value": null
+            },
+            "G42": {
+                "value": null
+            }
+        },
+        {
+            "E43": {
+                "value": "S1.L83IPC=1  8<HRSG.A0.LBA32.AA091XJ01<10"
+            },
+            "F43": {
+                "value": null
+            },
+            "G43": {
+                "value": null
+            }
+        },
+        {
+            "E44": {
+                "value": "S1.L83IPC=1  G1.L43TMON=0  HRSG.A0.LBA11.CT001XJ01-S1.TT_1SB_CS<180"
+            },
+            "F44": {
+                "value": null
+            },
+            "G44": {
+                "value": null
+            }
+        },
+        {
+            "E45": {
+                "value": "G1.CSGV<=41,5  G1.L90PSEL_CMD=110  G1.L83PS=1"
+            },
+            "F45": {
+                "value": null
+            },
+            "G45": {
+                "value": null
+            }
+        },
+        {
+            "E46": {
+                "value": null
+            },
+            "F46": {
+                "value": null
+            },
+            "G46": {
+                "value": "50<HRSG.A1.LAB10.CT001CCV<70"
+            }
+        },
+        {
+            "E47": {
+                "value": "G1.L90PSEL_CMD=150"
+            },
+            "F47": {
+                "value": null
+            },
+            "G47": {
+                "value": null
+            }
+        },
+        {
+            "E48": {
+                "value": "HRSG.A1.LBA50.AA002XH01=1  HRSG.A1.LBA50.AA002AUTO=1"
+            },
+            "F48": {
+                "value": null
+            },
+            "G48": {
+                "value": null
+            }
+        },
+        {
+            "E50": {
+                "value": "HRSG.A1.LBA50.IP_BKP_ON=1"
+            },
+            "F50": {
+                "value": null
+            },
+            "G50": {
+                "value": null
+            }
+        },
+        {
+            "E51": {
+                "value": "HRSG.A0.LBA40.C001YM01=1"
+            },
+            "F51": {
+                "value": null
+            },
+            "G51": {
+                "value": null
+            }
+        },
+        {
+            "E53": {
+                "value": null
+            },
+            "F53": {
+                "value": "RBOP.A81.HNE10.CQ001XJ02<100   RBOP.A81.HNE10.CQ004XJ04<50 "
+            },
+            "G53": {
+                "value": null
+            }
+        },
+        {
+            "E54": {
+                "value": "HRSG.A1.HAC90.SULPHUR_SP=3"
+            },
+            "F54": {
+                "value": null
+            },
+            "G54": {
+                "value": null
+            }
+        },
+        {
+            "E55": {
+                "value": "G1.L83LDFLR_ON=1"
+            },
+            "F55": {
+                "value": null
+            },
+            "G55": {
+                "value": null
+            }
+        },
+        {
+            "E57": {
+                "value": "50<HRSG.A1.LAB10.CT001CCV<70   G1.DWATT>150  S1.IPCR_CMD=50"
+            },
+            "F57": {
+                "value": null
+            },
+            "G57": {
+                "value": null
+            }
+        },
+        {
+            "E58": {
+                "value": "S1.LDR_RCMDO=10"
+            },
+            "F58": {
+                "value": null
+            },
+            "G58": {
+                "value": null
+            }
+        },
+        {
+            "E59": {
+                "value": "BOP.A0.QHA02.AC001YD01=0   BOP.A0.QHA01.AC001YD0=1                                                       o                                                                                                     BOP.A0.QHA02.AC001YD01=1   BOP.A0.QHA01.AC001YD0=0"
+            },
+            "F59": {
+                "value": null
+            },
+            "G59": {
+                "value": null
+            }
+        }
+    ]
+}

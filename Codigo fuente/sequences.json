@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Secuencia Principal",
+    "steps": [
+      {
+        "name": "Paso 1",
+        "conditions": [
+          { "signal": "temperatura", "operator": ">", "target": 50 },
+          { "signal": "presion", "operator": "<", "target": 100 }
+        ],
+        "duration": 2000
+      },
+      {
+        "name": "Paso 2",
+        "parallel": [
+          [
+            {
+              "name": "Rama 1 - Paso 1",
+              "conditions": [
+                { "signal": "flujo", "operator": ">=", "target": 20 }
+              ],
+              "duration": 3000
+            }
+          ],
+          [
+            {
+              "name": "Rama 2 - Paso 1",
+              "conditions": [
+                { "signal": "nivel", "operator": "==", "target": 50 }
+              ],
+              "duration": 1500
+            }
+          ]
+        ]
+      },
+      {
+        "name": "Paso 3",
+        "conditions": [
+          { "signal": "energia", "operator": "!=", "target": 0 }
+        ],
+        "duration": 2000
+      }
+    ]
+  }
+]
