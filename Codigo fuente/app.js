@@ -120,9 +120,6 @@ function renderSequences() {
                             <div class="formula-container">
                                 ${formulaHtml}
                             </div>
-                            <div id="signals-${seqIndex}-${branchIndex}-${subIndex}" class="signal-values">
-                                <!-- Valores de señales -->
-                            </div>
                             <div class="timestamp" id="timestamp-${seqIndex}-${branchIndex}-${subIndex}">Inicio: -- | Fin: --</div>
                         </div>
                     `;
@@ -153,87 +150,73 @@ function updateSignalValues(requiredSignals = null) {
     
     // Solo leer las señales requeridas
     if (requiredSignals) {
-        leer_datos_pi(requiredSignals); // Pasar las señales requeridas como parámetro
+        leer_datos_pi(requiredSignals);
     }
-
-    sequences.forEach((sequence, seqIndex) => {
-        sequence.branches.forEach((branch, branchIndex) => {
-            branch.sequences.forEach((subSequence, subIndex) => {
-                const signalContainer = document.getElementById(`signals-${seqIndex}-${branchIndex}-${subIndex}`);
-                const signals = requiredSignals || subSequence.formula.match(/\w+(?=\s*[=><!])/g);
-                const signalValuesToDisplay = signals.map(signal => `${signal}: ${signalValues[signal]}`);
-
-                if (!signalContainer.dataset.fixed) {
-                    signalContainer.innerHTML = signalValuesToDisplay.map(value => `<div>${value}</div>`).join('');
-                }
-            });
-        });
-    });
 
     isUpdatingSignals = false;
 }
 
 
 
-// Start the sequence execution
-function startSequence_old() {
-    if (currentSequenceIndex >= sequences.length) return;
-
-    const sequence = sequences[currentSequenceIndex];
-    const branches = sequence.branches;
-
-    const branchPromises = branches.map((branch, branchIndex) => {
-        return new Promise(resolveBranch => {
-            let currentSubSequenceIndex = 0;
-
-            function processSubSequence() {
-                if (currentSubSequenceIndex >= branch.sequences.length) {
-                    resolveBranch(); // Rama completada
-                    return;
-                }
-
-                const subSequence = branch.sequences[currentSubSequenceIndex];
-                const subSequenceBox = document.querySelector(`.sequence-box[data-index="${currentSequenceIndex}"] .branch[data-branch="${branchIndex}"] .sub-sequence[data-subsequence="${currentSubSequenceIndex}"]`);
-                const timestamp = document.getElementById(`timestamp-${currentSequenceIndex}-${branchIndex}-${currentSubSequenceIndex}`);
-                const signalContainer = document.getElementById(`signals-${currentSequenceIndex}-${branchIndex}-${currentSubSequenceIndex}`);
-
-                const startTime = new Date();
-                timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: --`;
-
-                const frozenValues = { ...signalValues }; // Congelar valores actuales
-                const interval = setInterval(() => {
-
-                    updateSignalValues();
-                    if (evaluateFormula(subSequence.formula, frozenValues)) {
-                        clearInterval(interval);
-
-                        // Marcar contenedor como fijo
-                        signalContainer.dataset.fixed = true;
-                        const fixedSignalValues = Object.keys(frozenValues).map(signal => `${signal}: ${frozenValues[signal]}`);
-                        signalContainer.innerHTML = fixedSignalValues.map(value => `<div>${value}</div>`).join('');
-
-                        setTimeout(() => {
-                            const endTime = new Date();
-                            timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: ${endTime.toLocaleTimeString()}`;
-                            subSequenceBox.classList.add('complete');
-                            currentSubSequenceIndex++;
-                            processSubSequence(); // Procesar siguiente subsecuencia
-                        }, subSequence.delay);
-                    }
-                }, 10000); // Control estricto del intervalo
-            }
-
-            processSubSequence(); // Inicia la primera subsecuencia
-        });
-    });
-
-    Promise.all(branchPromises).then(() => {
-        const sequenceBox = document.querySelector(`.sequence-box[data-index="${currentSequenceIndex}"]`);
-        sequenceBox.classList.add('complete');
-        currentSequenceIndex++;
-        startSequence();
-    });
-}
+// // Start the sequence execution
+// function startSequence_old() {
+//     if (currentSequenceIndex >= sequences.length) return;
+// 
+//     const sequence = sequences[currentSequenceIndex];
+//     const branches = sequence.branches;
+// 
+//     const branchPromises = branches.map((branch, branchIndex) => {
+//         return new Promise(resolveBranch => {
+//             let currentSubSequenceIndex = 0;
+// 
+//             function processSubSequence() {
+//                 if (currentSubSequenceIndex >= branch.sequences.length) {
+//                     resolveBranch(); // Rama completada
+//                     return;
+//                 }
+// 
+//                 const subSequence = branch.sequences[currentSubSequenceIndex];
+//                 const subSequenceBox = document.querySelector(`.sequence-box[data-index="${currentSequenceIndex}"] .branch[data-branch="${branchIndex}"] .sub-sequence[data-subsequence="${currentSubSequenceIndex}"]`);
+//                 const timestamp = document.getElementById(`timestamp-${currentSequenceIndex}-${branchIndex}-${currentSubSequenceIndex}`);
+//                 const signalContainer = document.getElementById(`signals-${currentSequenceIndex}-${branchIndex}-${currentSubSequenceIndex}`);
+// 
+//                 const startTime = new Date();
+//                 timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: --`;
+// 
+//                 const frozenValues = { ...signalValues }; // Congelar valores actuales
+//                 const interval = setInterval(() => {
+// 
+//                     updateSignalValues();
+//                     if (evaluateFormula(subSequence.formula, frozenValues)) {
+//                         clearInterval(interval);
+// 
+//                         // Marcar contenedor como fijo
+//                         signalContainer.dataset.fixed = true;
+//                         const fixedSignalValues = Object.keys(frozenValues).map(signal => `${signal}: ${frozenValues[signal]}`);
+//                         signalContainer.innerHTML = fixedSignalValues.map(value => `<div>${value}</div>`).join('');
+// 
+//                         setTimeout(() => {
+//                             const endTime = new Date();
+//                             timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: ${endTime.toLocaleTimeString()}`;
+//                             subSequenceBox.classList.add('complete');
+//                             currentSubSequenceIndex++;
+//                             processSubSequence(); // Procesar siguiente subsecuencia
+//                         }, subSequence.delay);
+//                     }
+//                 }, 10000); // Control estricto del intervalo
+//             }
+// 
+//             processSubSequence(); // Inicia la primera subsecuencia
+//         });
+//     });
+// 
+//     Promise.all(branchPromises).then(() => {
+//         const sequenceBox = document.querySelector(`.sequence-box[data-index="${currentSequenceIndex}"]`);
+//         sequenceBox.classList.add('complete');
+//         currentSequenceIndex++;
+//         startSequence();
+//     });
+// }
 
 
 // Iniciar la ejecución de la secuencia
@@ -273,17 +256,11 @@ function startSequence() {
                 const requiredSignals = extractSignalsFromFormula(subSequence.formula);
                 updateSignalValues(requiredSignals);
                 
-                // Solo congelar los valores cuando la fórmula completa se cumpla
                 const formulaResult = evaluateFormula(subSequence.formula, frozenValues);
                 
                 if (formulaResult) {
                     if (!frozenValues) {
                         frozenValues = { ...signalValues };
-                        // Marcar contenedor como fijo
-                        signalContainer.dataset.fixed = true;
-                        const fixedSignalValues = Object.keys(frozenValues).map(signal => `${signal}: ${frozenValues[signal]}`);
-                        signalContainer.innerHTML = fixedSignalValues.map(value => `<div>${value}</div>`).join('');
-                        
                         clearInterval(interval);
                         
                         setTimeout(() => {

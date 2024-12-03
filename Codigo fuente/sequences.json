@@ -6,15 +6,15 @@
               "id": "Branch 1",
               "sequences": [
                   { "formula": "signal1 = 1 AND signal2 > 3 OR signal3 > 1", "delay": 10 },
-                  { "formula": "signal2 > 3", "delay": 10 },
-                  { "formula": "signal3 < 2", "delay": 10 }
+                  { "formula": "signal4 > 3", "delay": 10 },
+                  { "formula": "signal5 < 2", "delay": 10 }
 
               ]
           },
           {
               "id": "Branch 2",
               "sequences": [
-                  { "formula": "signal2 > 8", "delay": 10 }
+                  { "formula": "signal6 > 8", "delay": 10 }
               ]
           }
       ]
@@ -25,20 +25,20 @@
           {
               "id": "Branch 1",
               "sequences": [
-                  { "formula": "signal4 = 1", "delay": 10 },
-                  { "formula": "signal5 > 3", "delay": 10 }
+                  { "formula": "signal7 = 1", "delay": 10 },
+                  { "formula": "signal8 > 3", "delay": 10 }
               ]
           },
           {
               "id": "Branch 2",
               "sequences": [
-                  { "formula": "signal4 > 8", "delay": 10 }
+                  { "formula": "signal9 > 8", "delay": 10 }
               ]
           },
           {
               "id": "Branch 3",
               "sequences": [
-                  { "formula": "signal6 > 8", "delay": 10 }
+                  { "formula": "signal10 > 8", "delay": 10 }
               ]
           }
       ]
@@ -49,7 +49,13 @@
           {
               "id": "Branch 1",
               "sequences": [
-                  { "formula": "signal7 < 5", "delay": 10 }
+                  { "formula": "signal11 < 5", "delay": 10 }
+              ]
+          }, 
+          {
+              "id": "Branch 2",
+              "sequences": [
+                  { "formula": "signal12 > 8", "delay": 10 }
               ]
           }
       ]
