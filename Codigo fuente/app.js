@@ -83,10 +83,30 @@ function evaluateFormula(formula, frozenValues = null) {
 }
 
 // Load sequences from a JSON file
-async function loadSequences() {
-    const response = await fetch('sequences.json');
-    sequences = await response.json();
-    renderSequences();
+async function loadSequences(jsonFile = null) {
+    try {
+        if (jsonFile) {
+            // Cargar desde archivo subido
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    sequences = JSON.parse(e.target.result);
+                    renderSequences();
+                } catch (error) {
+                    alert('Error al parsear el archivo JSON: ' + error.message);
+                }
+            };
+            reader.readAsText(jsonFile);
+        } else {
+            // Limpiar secuencias si no hay archivo
+            sequences = [];
+            renderSequences();
+        }
+    } catch (error) {
+        console.error('Error al cargar secuencias:', error);
+        sequences = [];
+        renderSequences();
+    }
 }
 
 // Render sequences to the DOM
@@ -320,10 +340,20 @@ function startSignalUpdate() {
 
 // Event listeners
 document.getElementById('start').addEventListener('click', () => {
+    if (sequences.length === 0) {
+        alert('Por favor, carga un archivo de secuencias primero');
+        return;
+    }
     startSequence();
     startSignalUpdate();
 });
 document.getElementById('reset').addEventListener('click', resetSequences);
+document.getElementById('fileInput').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        loadSequences(file);
+    }
+});
 
 // Load sequences on page load
 loadSequences();

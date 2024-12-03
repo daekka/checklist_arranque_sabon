@@ -1,0 +1,218 @@
+:root {
+  --primary: #2D3436;
+  --secondary: #00B894;
+  --background: #f8f9fa;
+  --card-bg: #ffffff;
+  --success: #00CEC9;
+  --error: #FF7675;
+  --text: #2D3436;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+  background: var(--background);
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0;
+  padding: 2rem;
+}
+
+/* Contenedor principal */
+#sequence-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Cajas de secuencia */
+.sequence-box {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 20px var(--shadow);
+  transition: transform 0.3s ease;
+}
+
+.sequence-box:hover {
+  transform: translateY(-5px);
+}
+
+/* Encabezados */
+h2 {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin: 0 0 1.5rem 0;
+  border-bottom: 2px solid var(--secondary);
+  padding-bottom: 0.5rem;
+}
+
+/* Ramas */
+.branch {
+  background: rgba(0, 184, 148, 0.05);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Subsecuencias */
+.sub-sequence {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Fórmulas y condiciones */
+.formula-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.condition {
+  background: rgba(0, 206, 201, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.operator {
+  color: var(--secondary);
+  font-weight: 800;
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estados y timestamps */
+.status-icon {
+  font-size: 1rem;
+}
+
+.timestamp {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+/* Botones */
+button {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #00a383;
+  transform: translateY(-2px);
+}
+
+.complete-button {
+  background: var(--primary);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+/* Estados completados */
+.complete {
+  border-left: 4px solid var(--success);
+}
+
+.manual-complete {
+  border-left: 4px solid var(--secondary);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sequence-box {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+  
+  #sequence-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Nuevo estilo para el botón de selección de archivo */
+.file-input-container {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.file-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.file-label:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.file-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  fill: currentColor;
+}
+
+.file-text {
+  margin-right: 8px;
+}
+
+.file-name {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* Cuando se está arrastrando un archivo */
+.file-label.drag-over {
+  background-color: #45a049;
+  border: 2px dashed #fff;
+} 
