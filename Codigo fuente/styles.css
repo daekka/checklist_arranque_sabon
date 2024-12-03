@@ -99,6 +99,11 @@ button:hover {
   border-bottom: none;
 }
 
+.sub-sequence.manual-complete {
+  background-color: #fff3cd;
+  border-left: 4px solid #ffc107;
+}
+
 /* Signal Display */
 .signal {
   font-size: 14px;

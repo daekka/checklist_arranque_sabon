@@ -268,19 +268,22 @@ function startSequence() {
             }, 5000);
 
             // Función para completar la subsecuencia
-            function completeSubSequence() {
+            function completeSubSequence(isManual = false) {
                 if (!frozenValues) {
                     frozenValues = { ...signalValues };
                     clearInterval(interval);
                     
-                    // Ocultar el botón una vez completada
                     completeButton.style.display = 'none';
                     
                     setTimeout(() => {
                         const endTime = new Date();
                         const timeDiff = formatTimeDifference(startTime, endTime);
-                        timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: ${endTime.toLocaleTimeString()} | Duración: ${timeDiff}`;
+                        const completionType = isManual ? '[Completado manualmente]' : '';
+                        timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: ${endTime.toLocaleTimeString()} | Duración: ${timeDiff} ${completionType}`;
                         subSequenceBox.classList.add('complete');
+                        if (isManual) {
+                            subSequenceBox.classList.add('manual-complete');
+                        }
                         currentSubSequenceIndex++;
                         processSubSequence();
                     }, subSequence.delay);
@@ -289,7 +292,7 @@ function startSequence() {
 
             // Agregar el evento click al botón
             completeButton.onclick = () => {
-                completeSubSequence();
+                completeSubSequence(true);
             };
         }
 
