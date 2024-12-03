@@ -147,7 +147,7 @@ function renderSequences() {
 
         const box = `
             <div class="sequence-box" data-index="${seqIndex}">
-                <h2>Secuencia ${sequence.id}</h2>
+                <h2>${sequence.id}</h2>
                 <div class="branch-container">
                     ${branchesHtml}
                 </div>
@@ -338,6 +338,11 @@ function startSignalUpdate() {
 
 // Event listeners
 document.getElementById('start').addEventListener('click', () => {
+    // Cambiar el color del botón a verde
+    const startButton = document.getElementById('start');
+    startButton.style.backgroundColor = 'green'; // Cambiar color a verde
+    startButton.textContent = 'Arrancado'; // Cambiar el texto a "Arrancado"
+
     if (sequences.length === 0) {
         alert('Por favor, carga un archivo de secuencias primero');
         return;
