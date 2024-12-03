@@ -45,17 +45,16 @@ function extractSignalsFromFormula(formula) {
 
 // Parse the formula and evaluate the condition
 function evaluateFormula(formula, frozenValues = null) {
-    // const valuesToUse = frozenValues || signalValues; // Use frozen values or current values
-    const valuesToUse = signalValues;
+    const valuesToUse = frozenValues || signalValues;
     const conditions = formula.split(/(AND|OR)/);
     let result = null;
 
+    // Evaluar cada condición individual
     for (let i = 0; i < conditions.length; i += 2) {
-        const [signal, operator, value] = conditions[i].trim().match(/(\w+)\s*(=|!=|>|<)\s*(\d+)/).slice(1);
+        const condition = conditions[i].trim();
+        const [signal, operator, value] = condition.match(/(\w+)\s*(=|!=|>|<)\s*(\d+)/).slice(1);
 
         const signalValue = valuesToUse[signal];
-        console.log (valuesToUse);
-        console.log (signalValue);
         let conditionResult = false;
 
         switch (operator) {
@@ -64,7 +63,14 @@ function evaluateFormula(formula, frozenValues = null) {
             case '>': conditionResult = signalValue > value; break;
             case '<': conditionResult = signalValue < value; break;
         }
-        console.log (conditionResult);
+
+        // Actualizar el icono de estado y el valor actual
+        const conditionElements = document.querySelectorAll(`.condition[data-signal="${signal}"][data-operator="${operator}"][data-value="${value}"]`);
+        conditionElements.forEach(element => {
+            const statusIcon = element.querySelector('.status-icon');
+            statusIcon.textContent = `${conditionResult ? '✅' : '❌'} (${signalValue})`;
+        });
+
         if (i === 0) {
             result = conditionResult;
         } else {
@@ -72,7 +78,7 @@ function evaluateFormula(formula, frozenValues = null) {
             result = operatorLogic === 'AND' ? result && conditionResult : result || conditionResult;
         }
     }
-    console.log ("------------------------------");
+
     return result;
 }
 
@@ -92,15 +98,35 @@ function renderSequences() {
         const branchesHtml = sequence.branches.map((branch, branchIndex) => `
             <div class="branch" data-branch="${branchIndex}">
                 <h3>Rama ${branch.id}</h3>
-                ${branch.sequences.map((subSequence, subIndex) => `
-                    <div class="sub-sequence" data-subsequence="${subIndex}">
-                        <div class="signal">Fórmula: ${subSequence.formula}</div>
-                        <div id="signals-${seqIndex}-${branchIndex}-${subIndex}" class="signal-values">
-                            <!-- Valores de señales -->
+                ${branch.sequences.map((subSequence, subIndex) => {
+                    // Dividir la fórmula en condiciones individuales
+                    const conditions = subSequence.formula.split(/(AND|OR)/).map(part => part.trim());
+                    const formulaHtml = conditions.map((condition, idx) => {
+                        if (condition === 'AND' || condition === 'OR') {
+                            return `<div class="operator">${condition}</div>`;
+                        } else {
+                            const [signal, operator, value] = condition.match(/(\w+)\s*(=|!=|>|<)\s*(\d+)/).slice(1);
+                            return `
+                                <div class="condition" data-signal="${signal}" data-operator="${operator}" data-value="${value}">
+                                    <span class="status-icon">❓</span> <!-- Se actualizará dinámicamente -->
+                                    ${signal} ${operator} ${value}
+                                </div>
+                            `;
+                        }
+                    }).join('');
+
+                    return `
+                        <div class="sub-sequence" data-subsequence="${subIndex}">
+                            <div class="formula-container">
+                                ${formulaHtml}
+                            </div>
+                            <div id="signals-${seqIndex}-${branchIndex}-${subIndex}" class="signal-values">
+                                <!-- Valores de señales -->
+                            </div>
+                            <div class="timestamp" id="timestamp-${seqIndex}-${branchIndex}-${subIndex}">Inicio: -- | Fin: --</div>
                         </div>
-                        <div class="timestamp" id="timestamp-${seqIndex}-${branchIndex}-${subIndex}">Inicio: -- | Fin: --</div>
-                    </div>
-                `).join('')}
+                    `;
+                }).join('')}
             </div>
         `).join('');
 
@@ -218,10 +244,10 @@ function startSequence() {
     const branches = sequence.branches;
 
     let completedBranches = 0;
-    console.log(branches);
+    
     branches.forEach((branch, branchIndex) => {
         let currentSubSequenceIndex = 0;
-        console.log(branch);
+        
         function processSubSequence() {
             if (currentSubSequenceIndex >= branch.sequences.length) {
                 completedBranches++;
@@ -242,32 +268,37 @@ function startSequence() {
             const startTime = new Date();
             timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: --`;
 
-            const frozenValues = { ...signalValues }; // Congelar valores actuales
+            let frozenValues = null;
             const interval = setInterval(() => {
-                console.log(subSequence);
                 const requiredSignals = extractSignalsFromFormula(subSequence.formula);
-                console.log("Señales requeridas:", requiredSignals);
                 updateSignalValues(requiredSignals);
-                if (evaluateFormula(subSequence.formula, frozenValues)) {
-                    clearInterval(interval);
-
-                    // Marcar contenedor como fijo
-                    signalContainer.dataset.fixed = true;
-                    const fixedSignalValues = Object.keys(frozenValues).map(signal => `${signal}: ${frozenValues[signal]}`);
-                    signalContainer.innerHTML = fixedSignalValues.map(value => `<div>${value}</div>`).join('');
-
-                    setTimeout(() => {
-                        const endTime = new Date();
-                        timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: ${endTime.toLocaleTimeString()}`;
-                        subSequenceBox.classList.add('complete');
-                        currentSubSequenceIndex++;
-                        processSubSequence(); // Procesar siguiente subsecuencia
-                    }, subSequence.delay);
+                
+                // Solo congelar los valores cuando la fórmula completa se cumpla
+                const formulaResult = evaluateFormula(subSequence.formula, frozenValues);
+                
+                if (formulaResult) {
+                    if (!frozenValues) {
+                        frozenValues = { ...signalValues };
+                        // Marcar contenedor como fijo
+                        signalContainer.dataset.fixed = true;
+                        const fixedSignalValues = Object.keys(frozenValues).map(signal => `${signal}: ${frozenValues[signal]}`);
+                        signalContainer.innerHTML = fixedSignalValues.map(value => `<div>${value}</div>`).join('');
+                        
+                        clearInterval(interval);
+                        
+                        setTimeout(() => {
+                            const endTime = new Date();
+                            timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: ${endTime.toLocaleTimeString()}`;
+                            subSequenceBox.classList.add('complete');
+                            currentSubSequenceIndex++;
+                            processSubSequence();
+                        }, subSequence.delay);
+                    }
                 }
-            }, 5000); // Control estricto del intervalo
+            }, 5000);
         }
 
-        processSubSequence(); // Inicia la primera subsecuencia
+        processSubSequence();
     });
 }
 
