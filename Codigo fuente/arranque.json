@@ -18,7 +18,7 @@
             {
                 "id": "DESPACHO",
                 "sequences": [
-                    { "formula": "DUMMY = 999", "delay": 10, "tiempo_alarma": 10 }
+                    { "formula": "DUMMY = 999", "delay": 10, "tiempo_alarma": 10000 }
   
                 ]
             }
@@ -59,20 +59,20 @@
             "id": "En marcha un 88BT",
             "sequences": [
               
-                { "formula": "G1.L52BT1 = 1 OR G1.L52BT2 = 1", "delay": 10, "tiempo_alarma": 10 }
+                { "formula": "G1.L52BT1 = 1 OR G1.L52BT2 = 1", "delay": 10, "tiempo_alarma": 30 }
 
             ]
         },
         {
             "id": "En marcha un 88BD",
             "sequences": [
-                { "formula": "G1.L52BD1 = 1 OR G1.L52BD2 = 1", "delay": 10, "tiempo_alarma": 10 }
+                { "formula": "G1.L52BD1 = 1 OR G1.L52BD2 = 1", "delay": 10, "tiempo_alarma": 30 }
             ]
         },
         {
             "id": "En marcha un 88VG",
             "sequences": [
-                { "formula": "G1.L52VG1 = 1 OR G1.L52VG2 = 1", "delay": 10, "tiempo_alarma": 10 }
+                { "formula": "G1.L52VG1 = 1 OR G1.L52VG2 = 1", "delay": 10, "tiempo_alarma": 30 }
             ]
         }
     ]
