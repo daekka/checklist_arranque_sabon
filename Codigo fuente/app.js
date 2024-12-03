@@ -288,7 +288,8 @@ function startSequence() {
                         
                         setTimeout(() => {
                             const endTime = new Date();
-                            timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: ${endTime.toLocaleTimeString()}`;
+                            const timeDiff = formatTimeDifference(startTime, endTime);
+                            timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: ${endTime.toLocaleTimeString()} | Duración: ${timeDiff}`;
                             subSequenceBox.classList.add('complete');
                             currentSubSequenceIndex++;
                             processSubSequence();
@@ -329,3 +330,22 @@ document.getElementById('reset').addEventListener('click', resetSequences);
 
 // Load sequences on page load
 loadSequences();
+
+// Función auxiliar para formatear la diferencia de tiempo
+function formatTimeDifference(startTime, endTime) {
+    const diff = endTime - startTime;
+    const seconds = Math.floor(diff / 1000);
+    
+    if (seconds < 60) {
+        return `${seconds} segundos`;
+    } else if (seconds < 3600) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${minutes} minutos ${remainingSeconds} segundos`;
+    } else {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = seconds % 60;
+        return `${hours} horas ${minutes} minutos ${remainingSeconds} segundos`;
+    }
+}
