@@ -144,3 +144,8 @@ button:hover {
 .status-icon {
     font-size: 1.2em;
 }
+
+.complete-button {
+    margin: 10px 0;
+    padding: 5px 10px;
+    background-color: #4CAF50;

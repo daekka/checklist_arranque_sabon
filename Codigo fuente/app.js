@@ -120,6 +120,7 @@ function renderSequences() {
                             <div class="formula-container">
                                 ${formulaHtml}
                             </div>
+                            <button class="complete-button" style="display: none;">Completar manualmente</button>
                             <div class="timestamp" id="timestamp-${seqIndex}-${branchIndex}-${subIndex}">Inicio: -- | Fin: --</div>
                         </div>
                     `;
@@ -246,8 +247,11 @@ function startSequence() {
             const subSequence = branch.sequences[currentSubSequenceIndex];
             const subSequenceBox = document.querySelector(`.sequence-box[data-index="${currentSequenceIndex}"] .branch[data-branch="${branchIndex}"] .sub-sequence[data-subsequence="${currentSubSequenceIndex}"]`);
             const timestamp = document.getElementById(`timestamp-${currentSequenceIndex}-${branchIndex}-${currentSubSequenceIndex}`);
-            const signalContainer = document.getElementById(`signals-${currentSequenceIndex}-${branchIndex}-${currentSubSequenceIndex}`);
-
+            const completeButton = subSequenceBox.querySelector('.complete-button');
+            
+            // Mostrar el botón para la subsecuencia actual
+            completeButton.style.display = 'block';
+            
             const startTime = new Date();
             timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: --`;
 
@@ -259,21 +263,34 @@ function startSequence() {
                 const formulaResult = evaluateFormula(subSequence.formula, frozenValues);
                 
                 if (formulaResult) {
-                    if (!frozenValues) {
-                        frozenValues = { ...signalValues };
-                        clearInterval(interval);
-                        
-                        setTimeout(() => {
-                            const endTime = new Date();
-                            const timeDiff = formatTimeDifference(startTime, endTime);
-                            timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: ${endTime.toLocaleTimeString()} | Duración: ${timeDiff}`;
-                            subSequenceBox.classList.add('complete');
-                            currentSubSequenceIndex++;
-                            processSubSequence();
-                        }, subSequence.delay);
-                    }
+                    completeSubSequence();
                 }
             }, 5000);
+
+            // Función para completar la subsecuencia
+            function completeSubSequence() {
+                if (!frozenValues) {
+                    frozenValues = { ...signalValues };
+                    clearInterval(interval);
+                    
+                    // Ocultar el botón una vez completada
+                    completeButton.style.display = 'none';
+                    
+                    setTimeout(() => {
+                        const endTime = new Date();
+                        const timeDiff = formatTimeDifference(startTime, endTime);
+                        timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: ${endTime.toLocaleTimeString()} | Duración: ${timeDiff}`;
+                        subSequenceBox.classList.add('complete');
+                        currentSubSequenceIndex++;
+                        processSubSequence();
+                    }, subSequence.delay);
+                }
+            }
+
+            // Agregar el evento click al botón
+            completeButton.onclick = () => {
+                completeSubSequence();
+            };
         }
 
         processSubSequence();
