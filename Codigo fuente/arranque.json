@@ -85,7 +85,7 @@
         {
             "id": "Tanque atmosférico",
             "sequences": [
-                { "formula": "BOP.A3.LCA54.AA091AUTO > 5 AND BOP.A3.LCA54.AA091XL01 < 5", "delay": 10, "tiempo_alarma": 10 }
+                { "formula": "BOP.A3.LCA54.AA091AUTO > 5 AND BOP.A3.LCA54.AA091XL01 < 5", "delay": 10, "tiempo_alarma": 25 }
             ]
         }
     ]
@@ -98,7 +98,7 @@
         {
             "id": "Purgas continuas AP y MP",
             "sequences": [
-                { "formula": "HRSG.A1.HAD10.AA001XH01 = 1 AND HRSG.A1.HAD50.AA001XH01 = 1", "delay": 10, "tiempo_alarma": 10 }
+                { "formula": "HRSG.A1.HAD10.AA001XH01 = 1 AND HRSG.A1.HAD50.AA001XH01 = 1", "delay": 10, "tiempo_alarma": 25 }
             ]
         }
     ]

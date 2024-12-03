@@ -9,7 +9,7 @@ const signalUpdateFrequency = 5000; // Frecuencia de actualización (ms)
 
 // Cargar el sonido de beep
 const beepSound = new Audio('beep.mp3'); // Asegúrate de tener un archivo de sonido en esta ruta
-
+const errorSound = new Audio('error.mp3'); // Asegúrate de tener un archivo de sonido en esta ruta
 
 // Simular lectura de señales del hardware
 function leer_datos_pi(requiredSignals = null) {
@@ -254,6 +254,7 @@ function startSequence() {
                     }
 
                     timestamp.children[2].appendChild(warningMessage);
+                    errorSound.play(); // Reproducir el sonido
                 } else {
                     // Limpiar mensaje de advertencia si el tiempo es aceptable
                     const existingWarning = timestamp.children[2].querySelector('span');
@@ -294,7 +295,6 @@ function startSequence() {
                             warningMessage.textContent = '⚠️ Advertencia: Tiempo de ejecución excedido';
                             warningMessage.style.color = 'red';
                             timestamp.children[2].appendChild(warningMessage);
-                            timestamp.children[2].textContent += ' ⚠️'; // Añadir el símbolo de advertencia al texto de duración
                         }
 
                         currentSubSequenceIndex++;
