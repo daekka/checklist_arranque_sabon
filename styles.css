@@ -215,4 +215,12 @@ button:hover {
 .file-label.drag-over {
   background-color: #45a049;
   border: 2px dashed #fff;
+}
+
+.timestamp-container {
+    margin: 10px 0;
+}
+
+.timestamp-line {
+    line-height: 1.5;
 } 

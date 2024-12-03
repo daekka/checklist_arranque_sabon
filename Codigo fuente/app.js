@@ -141,7 +141,11 @@ function renderSequences() {
                                 ${formulaHtml}
                             </div>
                             <button class="complete-button" style="display: none;">Completar manualmente</button>
-                            <div class="timestamp" id="timestamp-${seqIndex}-${branchIndex}-${subIndex}">Inicio: -- | Fin: --</div>
+                            <div class="timestamp-container" id="timestamp-${seqIndex}-${branchIndex}-${subIndex}">
+                                <div class="timestamp-line">Inicio: --</div>
+                                <div class="timestamp-line">Fin: --</div>
+                                <div class="timestamp-line">Duración: --</div>
+                            </div>
                         </div>
                     `;
                 }).join('')}
@@ -273,7 +277,9 @@ function startSequence() {
             completeButton.style.display = 'block';
             
             const startTime = new Date();
-            timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: --`;
+            timestamp.children[0].textContent = `Inicio: ${startTime.toLocaleTimeString()}`;
+            timestamp.children[1].textContent = 'Fin: --';
+            timestamp.children[2].textContent = 'Duración: --';
 
             let frozenValues = null;
             const interval = setInterval(() => {
@@ -299,7 +305,9 @@ function startSequence() {
                         const endTime = new Date();
                         const timeDiff = formatTimeDifference(startTime, endTime);
                         const completionType = isManual ? '[Completado manualmente]' : '';
-                        timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: ${endTime.toLocaleTimeString()} | Duración: ${timeDiff} ${completionType}`;
+                        timestamp.children[0].textContent = `Inicio: ${startTime.toLocaleTimeString()}`;
+                        timestamp.children[1].textContent = `Fin: ${endTime.toLocaleTimeString()}`;
+                        timestamp.children[2].textContent = `Duración: ${timeDiff} ${completionType}`;
                         subSequenceBox.classList.add('complete');
                         if (isManual) {
                             subSequenceBox.classList.add('manual-complete');
