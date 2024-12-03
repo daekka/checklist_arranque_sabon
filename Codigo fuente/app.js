@@ -3,8 +3,13 @@ let signalValues = {}; // Valores actuales de las señales
 let signalUpdateInterval; // Intervalo para actualizar señales
 let currentSequenceIndex = 0;
 
+
 // Configuración para la actualización periódica
 const signalUpdateFrequency = 5000; // Frecuencia de actualización (ms)
+
+// Cargar el sonido de beep
+const beepSound = new Audio('beep.mp3'); // Asegúrate de tener un archivo de sonido en esta ruta
+
 
 // Simular lectura de señales del hardware
 function leer_datos_pi(requiredSignals = null) {
@@ -34,6 +39,7 @@ function extractSignalsFromFormula(formula) {
 }
 
 
+
 // Parse the formula and evaluate the condition
 function evaluateFormula(formula, frozenValues = null) {
     const valuesToUse = frozenValues || signalValues;
@@ -56,6 +62,7 @@ function evaluateFormula(formula, frozenValues = null) {
             case '>=': conditionResult = signalValue >= value; break;
             case '<=': conditionResult = signalValue <= value; break;
         }
+
 
         // Actualizar el icono de estado y el valor actual
         const conditionElements = document.querySelectorAll(`.condition[data-signal="${signal}"][data-operator="${operator}"][data-value="${value}"]`);
@@ -256,6 +263,9 @@ function startSequence() {
                     const sequenceBox = document.querySelector(`.sequence-box[data-index="${currentSequenceIndex}"]`);
                     sequenceBox.classList.add('complete');
                     currentSequenceIndex++;
+                    // Reproducir beep si la condición se cumple
+                    beepSound.play(); // Reproducir el sonido
+
                     startSequence();
                 }
                 return;
