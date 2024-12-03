@@ -1,0 +1,97 @@
+[
+
+    {
+        "id": "OBTENIDOS todos los permisivos de arranque",
+        "branches": [
+            {
+                "id": "Permisivos de arranque",
+                "sequences": [
+                    { "formula": "BOP.S20_SYS_RDY <=  5", "delay": 10 }
+  
+                ]
+            }
+        ]
+    },
+    {
+        "id": "Confirmación con despacho",
+        "branches": [
+            {
+                "id": "DESPACHO",
+                "sequences": [
+                    { "formula": "DUMMY = 999", "delay": 10 }
+  
+                ]
+            }
+        ]
+    },
+    {
+
+      "id": "Control maestro 'Arrancar'",
+      "branches": [
+          {
+              "id": "Control maestro 'Arrancar'",
+              "sequences": [
+                  { "formula": "SAB:G1.L1X <= 5", "delay": 10 }
+
+              ]
+          }
+      ]
+   },
+
+   {
+
+    "id": "Velocidad > 100rpm",
+    "branches": [
+        {
+            "id": "VERIFICAR con thn>100 rpm",
+            "sequences": [
+                { "formula": "G1.TNH_V > 5", "delay": 10 }
+
+            ]
+        }
+    ]
+  },
+
+  {
+    "id": "VERIFICAR con thn>100 rpm en marcha un 88BT, un 88BD y un 88VG",
+    "branches": [
+        {
+            "id": "En marcha un 88BT",
+            "sequences": [
+              
+                { "formula": "G1.L52BT1 = 1 OR G1.L52BT2 = 1", "delay": 10 }
+
+            ]
+        },
+        {
+            "id": "En marcha un 88BD",
+            "sequences": [
+                { "formula": "GG1.L52BD1 = 1 OR G1.L52BD2 = 1", "delay": 10 }
+            ]
+        },
+        {
+            "id": "En marcha un 88VG",
+            "sequences": [
+                { "formula": "G1.L52VG1 = 1 OR G1.L52VG2 = 1", "delay": 10 }
+            ]
+        }
+    ]
+  },
+
+  {
+
+    "id": "ABIERTA válvula de atemperación del tanque atmosférico de drenajes de turbina de vapor y su bypass",
+    "branches": [
+        {
+            "id": "Branch 1",
+            "sequences": [
+                { "formula": "BOP.A3.LCA54.AA091AUTO > 5 AND BOP.A3.LCA54.AA091XL01 < 5", "delay": 10 }
+            ]
+        }
+    ]
+}
+
+
+
+
+]   

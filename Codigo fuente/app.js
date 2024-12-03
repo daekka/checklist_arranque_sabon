@@ -14,21 +14,12 @@ function leer_datos_pi(requiredSignals = null) {
     // Si se especifican señales requeridas, solo generar esas
     if (requiredSignals) {
         requiredSignals.forEach(signal => {
-            if (signal.startsWith('signal')) {
-                // Generar valores aleatorios según el tipo de señal
-                if (signal === 'signal1') {
-                    valores[signal] = Math.random() > 0.5 ? 1 : 0;
-                } else {
-                    valores[signal] = Math.floor(Math.random() * 10);
-                }
-            }
+            valores[signal] = Math.floor(Math.random() * 11); // Genera valores entre 0 y 10
         });
     } else {
-        // Si no hay señales requeridas, generar todas
+        // Si no hay señales requeridas, generar algunas por defecto
         valores = {
-            signal1: Math.random() > 0.5 ? 1 : 0,
-            signal2: Math.floor(Math.random() * 10),
-            signal3: Math.floor(Math.random() * 10)
+
         };
     }
     
@@ -38,7 +29,7 @@ function leer_datos_pi(requiredSignals = null) {
 
 // Nueva función para extraer señales de una fórmula
 function extractSignalsFromFormula(formula) {
-    const signals = formula.match(/\w+(?=\s*(>=|<=|=|!=|>|<))/g) || [];
+    const signals = formula.match(/[\w.]+(?=\s*(>=|<=|=|!=|>|<))/g) || [];
     return [...new Set(signals)]; // Eliminar duplicados
 }
 
@@ -52,7 +43,7 @@ function evaluateFormula(formula, frozenValues = null) {
     // Evaluar cada condición individual
     for (let i = 0; i < conditions.length; i += 2) {
         const condition = conditions[i].trim();
-        const [signal, operator, value] = condition.match(/(\w+)\s*(>=|<=|=|!=|>|<)\s*(\d+)/).slice(1);
+        const [signal, operator, value] = condition.match(/([\w.]+)\s*(>=|<=|=|!=|>|<)\s*(\d+)/).slice(1);
 
         const signalValue = valuesToUse[signal];
         let conditionResult = false;
@@ -119,7 +110,7 @@ function renderSequences() {
     sequences.forEach((sequence, seqIndex) => {
         const branchesHtml = sequence.branches.map((branch, branchIndex) => `
             <div class="branch" data-branch="${branchIndex}">
-                <h3>Rama ${branch.id}</h3>
+                <h3>${branch.id}</h3>
                 ${branch.sequences.map((subSequence, subIndex) => {
                     // Dividir la fórmula en condiciones individuales
                     const conditions = subSequence.formula.split(/(AND|OR)/).map(part => part.trim());
@@ -127,7 +118,7 @@ function renderSequences() {
                         if (condition === 'AND' || condition === 'OR') {
                             return `<div class="operator">${condition}</div>`;
                         } else {
-                            const [signal, operator, value] = condition.match(/(\w+)\s*(=|!=|>|<|>=|<=)\s*(\d+)/).slice(1);
+                            const [signal, operator, value] = condition.match(/([\w.]+)\s*(=|!=|>|<|>=|<=)\s*(\d+)/).slice(1);
                             return `
                                 <div class="condition" data-signal="${signal}" data-operator="${operator}" data-value="${value}">
                                     <span class="status-icon">❓</span> <!-- Se actualizará dinámicamente -->

@@ -1,6 +1,32 @@
 [
+
     {
-      "id": 1,
+        "id": 0,
+        "branches": [
+            {
+                "id": "OBTENIDOS todos los permisivos de arranque",
+                "sequences": [
+                    { "formula": "BOP.S20_SYS_RDY <=  5", "delay": 10 }
+  
+                ]
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "branches": [
+            {
+                "id": "Confirmación con despacho",
+                "sequences": [
+                    { "formula": "DUMMY = 999", "delay": 10 }
+  
+                ]
+            }
+        ]
+    },
+    {
+
+      "id": 2,
       "branches": [
           {
               "id": "Branch 1",
@@ -20,7 +46,7 @@
       ]
   },
   {
-      "id": 2,
+      "id": 3,
       "branches": [
           {
               "id": "Branch 1",
@@ -44,7 +70,7 @@
       ]
   },
   {
-      "id": 3,
+      "id": 4,
       "branches": [
           {
               "id": "Branch 1",
