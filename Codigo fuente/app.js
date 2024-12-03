@@ -6,15 +6,42 @@ let currentSequenceIndex = 0;
 // Configuración para la actualización periódica
 const signalUpdateFrequency = 5000; // Frecuencia de actualización (ms)
 
-// Simulate reading signals from hardware
-function leer_datos_pi() {
-    // Simulated signal values
-    signalValues = {
-        signal1: Math.random() > 0.5 ? 1 : 0, // Random 1 or 0
-        signal2: Math.floor(Math.random() * 10), // Random 0-9
-        signal3: Math.floor(Math.random() * 10) // Random 0-9
-    };
+// Simular lectura de señales del hardware
+function leer_datos_pi(requiredSignals = null) {
+    // Valores simulados de señales
+    let valores = {};
+    
+    // Si se especifican señales requeridas, solo generar esas
+    if (requiredSignals) {
+        requiredSignals.forEach(signal => {
+            if (signal.startsWith('signal')) {
+                // Generar valores aleatorios según el tipo de señal
+                if (signal === 'signal1') {
+                    valores[signal] = Math.random() > 0.5 ? 1 : 0;
+                } else {
+                    valores[signal] = Math.floor(Math.random() * 10);
+                }
+            }
+        });
+    } else {
+        // Si no hay señales requeridas, generar todas
+        valores = {
+            signal1: Math.random() > 0.5 ? 1 : 0,
+            signal2: Math.floor(Math.random() * 10),
+            signal3: Math.floor(Math.random() * 10)
+        };
+    }
+    
+    signalValues = valores;
+    return valores;
 }
+
+// Nueva función para extraer señales de una fórmula
+function extractSignalsFromFormula(formula) {
+    const signals = formula.match(/\w+(?=\s*[=><!])/g) || [];
+    return [...new Set(signals)]; // Eliminar duplicados
+}
+
 
 // Parse the formula and evaluate the condition
 function evaluateFormula(formula, frozenValues = null) {
@@ -92,20 +119,24 @@ function renderSequences() {
 
 let isUpdatingSignals = false; // Variable de bloqueo
 
-function updateSignalValues() {
-    if (isUpdatingSignals) return; // Salir si ya se está actualizando
+function updateSignalValues(requiredSignals = null) {
+    if (isUpdatingSignals) return;
     isUpdatingSignals = true;
-
-    leer_datos_pi(); // Actualizar valores de señales
+    console.log("Actualizando señales");
+    console.log(requiredSignals);
+    
+    // Solo leer las señales requeridas
+    if (requiredSignals) {
+        leer_datos_pi(requiredSignals); // Pasar las señales requeridas como parámetro
+    }
 
     sequences.forEach((sequence, seqIndex) => {
         sequence.branches.forEach((branch, branchIndex) => {
             branch.sequences.forEach((subSequence, subIndex) => {
                 const signalContainer = document.getElementById(`signals-${seqIndex}-${branchIndex}-${subIndex}`);
-                const signals = subSequence.formula.match(/\w+(?=\s*[=><!])/g); // Extraer nombres de señales
+                const signals = requiredSignals || subSequence.formula.match(/\w+(?=\s*[=><!])/g);
                 const signalValuesToDisplay = signals.map(signal => `${signal}: ${signalValues[signal]}`);
 
-                // Actualizar sólo si no está fijo
                 if (!signalContainer.dataset.fixed) {
                     signalContainer.innerHTML = signalValuesToDisplay.map(value => `<div>${value}</div>`).join('');
                 }
@@ -113,7 +144,7 @@ function updateSignalValues() {
         });
     });
 
-    isUpdatingSignals = false; // Liberar bloqueo
+    isUpdatingSignals = false;
 }
 
 
@@ -187,10 +218,10 @@ function startSequence() {
     const branches = sequence.branches;
 
     let completedBranches = 0;
-    console.log (branches);
+    console.log(branches);
     branches.forEach((branch, branchIndex) => {
         let currentSubSequenceIndex = 0;
-        console.log (branch);
+        console.log(branch);
         function processSubSequence() {
             if (currentSubSequenceIndex >= branch.sequences.length) {
                 completedBranches++;
@@ -213,8 +244,10 @@ function startSequence() {
 
             const frozenValues = { ...signalValues }; // Congelar valores actuales
             const interval = setInterval(() => {
-                console.log (subSequence);
-                updateSignalValues(subSequence.formula);
+                console.log(subSequence);
+                const requiredSignals = extractSignalsFromFormula(subSequence.formula);
+                console.log("Señales requeridas:", requiredSignals);
+                updateSignalValues(requiredSignals);
                 if (evaluateFormula(subSequence.formula, frozenValues)) {
                     clearInterval(interval);
 

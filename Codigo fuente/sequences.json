@@ -5,7 +5,7 @@
           {
               "id": "Branch 1",
               "sequences": [
-                  { "formula": "signal1 = 1", "delay": 10 },
+                  { "formula": "signal1 = 1 AND signal2 > 3", "delay": 10 },
                   { "formula": "signal2 > 3", "delay": 10 },
                   { "formula": "signal3 < 2", "delay": 10 }
 
