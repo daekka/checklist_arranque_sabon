@@ -40,7 +40,7 @@
 
    {
 
-    "id": "Velocidad > 100rpm",
+    "id": "Velocidad > 100 rpm",
     "branches": [
         {
             "id": "VERIFICAR con TNH >100 rpm",
@@ -83,7 +83,7 @@
     "id": "ABIERTA válvula de atemperación del tanque atmosférico de drenajes de turbina de vapor y su bypass",
     "branches": [
         {
-            "id": "Branch 1",
+            "id": "Tanque atmosférico",
             "sequences": [
                 { "formula": "BOP.A3.LCA54.AA091AUTO > 5 AND BOP.A3.LCA54.AA091XL01 < 5", "delay": 10, "tiempo_alarma": 10 }
             ]

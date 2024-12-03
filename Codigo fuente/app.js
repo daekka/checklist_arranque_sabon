@@ -170,8 +170,8 @@ let isUpdatingSignals = false; // Variable de bloqueo
 function updateSignalValues(requiredSignals = null) {
     if (isUpdatingSignals) return;
     isUpdatingSignals = true;
-    console.log("Actualizando señales");
-    console.log(requiredSignals);
+    //console.log("Actualizando señales");
+    //console.log(requiredSignals);
     
     // Solo leer las señales requeridas
     if (requiredSignals) {
@@ -180,68 +180,6 @@ function updateSignalValues(requiredSignals = null) {
 
     isUpdatingSignals = false;
 }
-
-
-
-// // Start the sequence execution
-// function startSequence_old() {
-//     if (currentSequenceIndex >= sequences.length) return;
-// 
-//     const sequence = sequences[currentSequenceIndex];
-//     const branches = sequence.branches;
-// 
-//     const branchPromises = branches.map((branch, branchIndex) => {
-//         return new Promise(resolveBranch => {
-//             let currentSubSequenceIndex = 0;
-// 
-//             function processSubSequence() {
-//                 if (currentSubSequenceIndex >= branch.sequences.length) {
-//                     resolveBranch(); // Rama completada
-//                     return;
-//                 }
-// 
-//                 const subSequence = branch.sequences[currentSubSequenceIndex];
-//                 const subSequenceBox = document.querySelector(`.sequence-box[data-index="${currentSequenceIndex}"] .branch[data-branch="${branchIndex}"] .sub-sequence[data-subsequence="${currentSubSequenceIndex}"]`);
-//                 const timestamp = document.getElementById(`timestamp-${currentSequenceIndex}-${branchIndex}-${currentSubSequenceIndex}`);
-//                 const signalContainer = document.getElementById(`signals-${currentSequenceIndex}-${branchIndex}-${currentSubSequenceIndex}`);
-// 
-//                 const startTime = new Date();
-//                 timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: --`;
-// 
-//                 const frozenValues = { ...signalValues }; // Congelar valores actuales
-//                 const interval = setInterval(() => {
-// 
-//                     updateSignalValues();
-//                     if (evaluateFormula(subSequence.formula, frozenValues)) {
-//                         clearInterval(interval);
-// 
-//                         // Marcar contenedor como fijo
-//                         signalContainer.dataset.fixed = true;
-//                         const fixedSignalValues = Object.keys(frozenValues).map(signal => `${signal}: ${frozenValues[signal]}`);
-//                         signalContainer.innerHTML = fixedSignalValues.map(value => `<div>${value}</div>`).join('');
-// 
-//                         setTimeout(() => {
-//                             const endTime = new Date();
-//                             timestamp.textContent = `Inicio: ${startTime.toLocaleTimeString()} | Fin: ${endTime.toLocaleTimeString()}`;
-//                             subSequenceBox.classList.add('complete');
-//                             currentSubSequenceIndex++;
-//                             processSubSequence(); // Procesar siguiente subsecuencia
-//                         }, subSequence.delay);
-//                     }
-//                 }, 10000); // Control estricto del intervalo
-//             }
-// 
-//             processSubSequence(); // Inicia la primera subsecuencia
-//         });
-//     });
-// 
-//     Promise.all(branchPromises).then(() => {
-//         const sequenceBox = document.querySelector(`.sequence-box[data-index="${currentSequenceIndex}"]`);
-//         sequenceBox.classList.add('complete');
-//         currentSequenceIndex++;
-//         startSequence();
-//     });
-// }
 
 
 // Iniciar la ejecución de la secuencia
@@ -294,13 +232,16 @@ function startSequence() {
                 // Verificar el tiempo de ejecución en tiempo real
                 const currentTime = new Date();
                 const timeDiff = formatTimeDifference(startTime, currentTime);
+                const timeDiffSeconds = (currentTime - startTime)/1000;
                 const expectedDuration = subSequence.tiempo_alarma; // Asegúrate de que el JSON tenga esta propiedad
 
                 // Actualizar el campo de duración
                 timestamp.children[2].textContent = `Duración: ${timeDiff}`;
 
                 // Comprobar si el tiempo de ejecución supera el tiempo del JSON
-                if (expectedDuration && timeDiff > expectedDuration) {
+                console.log (expectedDuration, timeDiffSeconds);
+                if (timeDiffSeconds > expectedDuration) {
+                    
                     // Esta condición verifica si el tiempo de duración esperado es mayor que el tiempo de duración real.
                     const warningMessage = document.createElement('span');
                     warningMessage.textContent = '⚠️ Advertencia: Tiempo de ejecución excedido';
