@@ -128,7 +128,7 @@ function renderSequences() {
                             const [signal, operator, value] = condition.match(/([\w.]+)\s*(=|!=|>|<|>=|<=)\s*(\d+)/).slice(1);
                             return `
                                 <div class="condition" data-signal="${signal}" data-operator="${operator}" data-value="${value}">
-                                    <span class="status-icon">❓</span> <!-- Se actualizará dinámicamente -->
+                                    <span class="status-icon">🕓</span> <!-- Se actualizará dinámicamente -->
                                     ${signal} ${operator} ${value}
                                 </div>
                             `;
@@ -291,6 +291,36 @@ function startSequence() {
                 
                 const formulaResult = evaluateFormula(subSequence.formula, frozenValues);
                 
+                // Verificar el tiempo de ejecución en tiempo real
+                const currentTime = new Date();
+                const timeDiff = formatTimeDifference(startTime, currentTime);
+                const expectedDuration = subSequence.tiempo_alarma; // Asegúrate de que el JSON tenga esta propiedad
+
+                // Actualizar el campo de duración
+                timestamp.children[2].textContent = `Duración: ${timeDiff}`;
+
+                // Comprobar si el tiempo de ejecución supera el tiempo del JSON
+                if (expectedDuration && timeDiff > expectedDuration) {
+                    // Esta condición verifica si el tiempo de duración esperado es mayor que el tiempo de duración real.
+                    const warningMessage = document.createElement('span');
+                    warningMessage.textContent = '⚠️ Advertencia: Tiempo de ejecución excedido';
+                    warningMessage.style.color = 'red';
+
+                    // Limpiar mensajes de advertencia anteriores
+                    const existingWarning = timestamp.children[2].querySelector('span');
+                    if (existingWarning) {
+                        existingWarning.remove();
+                    }
+
+                    timestamp.children[2].appendChild(warningMessage);
+                } else {
+                    // Limpiar mensaje de advertencia si el tiempo es aceptable
+                    const existingWarning = timestamp.children[2].querySelector('span');
+                    if (existingWarning) {
+                        existingWarning.remove();
+                    }
+                }
+
                 if (formulaResult) {
                     completeSubSequence();
                 }
@@ -315,6 +345,17 @@ function startSequence() {
                         if (isManual) {
                             subSequenceBox.classList.add('manual-complete');
                         }
+
+                        // Comprobar si el tiempo de ejecución supera el tiempo del JSON
+                        const expectedDuration = subSequence.tiempo_alarma; // Asegúrate de que el JSON tenga esta propiedad
+                        if (expectedDuration && timeDiff > expectedDuration) {
+                            const warningMessage = document.createElement('span');
+                            warningMessage.textContent = '⚠️ Advertencia: Tiempo de ejecución excedido';
+                            warningMessage.style.color = 'red';
+                            timestamp.children[2].appendChild(warningMessage);
+                            timestamp.children[2].textContent += ' ⚠️'; // Añadir el símbolo de advertencia al texto de duración
+                        }
+
                         currentSubSequenceIndex++;
                         processSubSequence();
                     }, subSequence.delay);
