@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secuencia de Arranque</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+    <h1>Secuencia de Arranque</h1>
+    <button id="start-btn">Comenzar</button>
+    <button id="stop-btn">Parar</button>
+
+    <div id="sequences-container">
+        {% for seq in sequences %}
+        <div class="sequence-box" id="seq-{{ seq.id }}">
+            <p>Secuencia: {{ seq.id }}</p>
+            {% if seq.branches %}
+            <div class="branches-container">
+                {% for branch in seq.branches %}
+                <div class="branch-box" id="branch-{{ branch.id }}">
+                    <p>Rama: {{ branch.id }}</p>
+                    <p>Fórmula: {{ branch.formula }}</p>
+                    <p>Estado: <span class="status">Pendiente</span></p>
+                    <div class="signals"></div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>Fórmula: {{ seq.formula }}</p>
+            <p>Estado: <span class="status">Pendiente</span></p>
+            <div class="signals"></div>
+            {% endif %}
+            <p>Inicio: <span class="start-time">N/A</span></p>
+            <p>Fin: <span class="end-time">N/A</span></p>
+        </div>
+        {% endfor %}
+    </div>
+    
+</body>
+</html>

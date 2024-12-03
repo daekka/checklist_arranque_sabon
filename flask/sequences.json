@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "formula": "signal1 > 50 AND signal2 < 30",
+        "delay": 2
+    },
+    {
+        "id": 2,
+        "branches": [
+            {
+                "id": 2.1,
+                "formula": "signal3 = 100",
+                "delay": 1
+            },
+            {
+                "id": 2.2,
+                "formula": "signal4 != 0 AND signal5 < 40",
+                "delay": 3
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "formula": "signal6 > 20 OR signal7 = 10",
+        "delay": 2
+    }
+]

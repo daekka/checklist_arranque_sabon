@@ -1,0 +1,120 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f7f7f7;
+  color: #333;
+}
+
+#app {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+#controls {
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Sequence Container */
+.sequence-container {
+  margin-top: 20px;
+}
+
+/* Sequence Box */
+.sequence-box {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #fff;
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sequence-box.complete {
+  background-color: #d4f7d4; /* Verde claro cuando está completa */
+}
+
+/* Branch Container */
+.branch-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Branch Box */
+.branch {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  width: 300px;
+  background-color: #f9f9f9;
+  text-align: left;
+  transition: background-color 0.3s;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.branch.complete {
+  background-color: #d4f7d4;
+}
+
+/* Sub-sequence Box */
+.sub-sequence {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s;
+  border-radius: 5px;
+}
+
+.sub-sequence.complete {
+  background-color: #d4f7d4;
+}
+
+.sub-sequence:last-child {
+  border-bottom: none;
+}
+
+/* Signal Display */
+.signal {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+/* Timestamp */
+.timestamp {
+  font-size: 12px;
+  color: #555;
+  margin-top: 5px;
+}
+
+/* Signal Values */
+.signal-values {
+  font-size: 13px;
+  margin-top: 5px;
+  color: #333;
+}
