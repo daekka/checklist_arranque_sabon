@@ -7,7 +7,7 @@
               "sequences": [
                   { "formula": "signal1 = 1 AND signal2 > 3 OR signal3 > 1", "delay": 10 },
                   { "formula": "signal4 > 3", "delay": 10 },
-                  { "formula": "signal5 < 2", "delay": 10 }
+                  { "formula": "signal5 <= 2", "delay": 10 }
 
               ]
           },
