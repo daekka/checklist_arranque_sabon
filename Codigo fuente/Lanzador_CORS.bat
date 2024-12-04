@@ -1,0 +1,1 @@
+start msedge --user-data-dir="%CD%\Edge_dev_session" --disable-web-security "file:///%CD%/index.html"

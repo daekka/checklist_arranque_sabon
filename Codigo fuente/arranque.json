@@ -102,7 +102,34 @@
             ]
         }
     ]
-}
+},
+
+{
+
+    "id": "ARRANQUE FINALIZADO",
+    "branches": [
+        {
+            "id": "Finalizado arranque",
+            "sequences": [
+                { "formula": "DUMMY = 999", "delay": 10, "tiempo_alarma": 10000 }
+            ]
+        }
+    ]
+},
+
+
+{
+
+    "id": "Prueba",
+    "branches": [
+        {
+            "id": "Ftexto explicativoi",
+            "sequences": [
+                { "formula": "G1.señal1 >= 4 AND G1.señal2 <3", "delay": 10, "tiempo_alarma": 25 }
+            ]
+        }
+    ]
+} 
 
 
 

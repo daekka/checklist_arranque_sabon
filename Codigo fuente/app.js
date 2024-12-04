@@ -1,18 +1,29 @@
+const usuario_pi = "uf183530";
+const password_pi = "nov2024";
+const servidor_pi = "https://azpgenpivisio01.intranet.gasnaturalfenosa.com/piwebapi/";
+const peticion_actual = "https://azpgenpivisio01.intranet.gasnaturalfenosa.com/piwebapi/streamsets/";
+const peticion_interpolado = "https://azpgenpivisio01.intranet.gasnaturalfenosa.com/piwebapi/streams/";
+const peticion_recorded = "https://azpgenpivisio01.intranet.gasnaturalfenosa.com/piwebapi/streams/";
+const peticion_info_tag = "https://azpgenpivisio01.intranet.gasnaturalfenosa.com/piwebapi/points/";
+
+
 let sequences = [];
 let signalValues = {}; // Valores actuales de las señales
 let signalUpdateInterval; // Intervalo para actualizar señales
 let currentSequenceIndex = 0;
-
 
 // Configuración para la actualización periódica
 const signalUpdateFrequency = 5000; // Frecuencia de actualización (ms)
 
 // Cargar el sonido de beep
 const beepSound = new Audio('beep.mp3'); // Asegúrate de tener un archivo de sonido en esta ruta
-const errorSound = new Audio('error.mp3'); // Asegúrate de tener un archivo de sonido en esta ruta
+const errorSound = new Audio('error_2.wav'); // Asegúrate de tener un archivo de sonido en esta ruta
 
 // Simular lectura de señales del hardware
 function leer_datos_pi(requiredSignals = null) {
+    console.log ("Señales PI:");
+    console.log (requiredSignals);
+    valor_actual = obtenerDatosPI_actual (requiredSignals);
     // Valores simulados de señales
     let valores = {};
     
@@ -369,5 +380,50 @@ function formatTimeDifference(startTime, endTime) {
         const minutes = Math.floor((seconds % 3600) / 60);
         const remainingSeconds = seconds % 60;
         return `${hours} horas ${minutes} minutos ${remainingSeconds} segundos`;
+    }
+}
+
+
+
+async function obtenerDatosPI_actual({tag}) {
+    console.log("Lanza petición a PIWEBAPI - Recorded");
+    const tagName = btoa("?PÏUWGEPI\\SAB:G1.TNH_V"); // + tag);
+    console.log (tagName);
+    try {
+        
+        //https://pvgenpiweb01.intranet.gasnaturalfenosa.com/piwebapi/streams/P1DPVVdHRVBJXFNBQjpTMS5TU0ZWX09VVA==/recorded'
+        //console.log(`${peticion_recorded}${tagName}/recorded?filterexpression=${filterexpression}?startTime=${startTime}&endTime=${endTime}`);
+        //const response = await fetch(`${peticion_recorded}${tagName}/recorded?filterexpression=${filterexpression}&startTime=${startTime}&endTime=${endTime}`, {
+            
+        //https://MyPIWebAPIServer/piwebapi/streamsets/value?webid=xxx&webid=yyy...
+
+        //const response = await fetch(`${peticion_actual}${tagName}/value`, {
+        const response = await fetch(`${peticion_actual}/value?webid=${tagName}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Basic ' + btoa(usuario_pi + ':' + password_pi),
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error('Error en la solicitud a PI Web API:', error);
+        }
+        
+        const data = await response.json();
+
+        const resultados = data.Items.map(item => ({
+            //timestamp: item.Timestamp,
+            value: item.Value,
+            //fechahora: item.Timestamp.split('T')[0] + " " + item.Timestamp.split('T')[1].split('.')[0]
+        }));
+        console.log("Consulta resuelta");
+        
+        console.log(resultados[0].value.Value);
+        return resultados;
+
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
     }
 }
