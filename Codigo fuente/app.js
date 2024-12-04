@@ -385,9 +385,10 @@ function formatTimeDifference(startTime, endTime) {
 
 
 
-async function obtenerDatosPI_actual({tag}) {
+async function obtenerDatosPI_actual(tag) {
     console.log("Lanza petición a PIWEBAPI - Recorded");
-    const tagName = btoa("?PÏUWGEPI\\SAB:G1.TNH_V"); // + tag);
+    console.log (tag);
+    const tagName = btoa("?PÏUWGEPI\\SAB:" + tag);
     console.log (tagName);
     try {
         
@@ -420,7 +421,7 @@ async function obtenerDatosPI_actual({tag}) {
         console.log("Consulta resuelta");
         
         console.log(resultados[0].value.Value);
-        return resultados;
+        return resultados[0].value.Value;
 
     } catch (error) {
         console.error('Error:', error);
