@@ -1,24 +1,24 @@
 [
 
     {
-        "id": 0,
+        "id": "Paso 0",
         "branches": [
             {
                 "id": "OBTENIDOS todos los permisivos de arranque",
                 "sequences": [
-                    { "formula": "BOP.S20_SYS_RDY <=  5", "delay": 10 }
+                    { "formula": "BOP.S20_SYS_RDY >=  5", "delay": 10, "tiempo_alarma": 30 }
   
                 ]
             }
         ]
     },
     {
-        "id": 1,
+        "id": "Paso 1",
         "branches": [
             {
                 "id": "Confirmación con despacho",
                 "sequences": [
-                    { "formula": "DUMMY = 999", "delay": 10 }
+                    { "formula": "DUMMY = 999", "delay": 10, "tiempo_alarma": 30  }
   
                 ]
             }
@@ -26,64 +26,148 @@
     },
     {
 
-      "id": 2,
+      "id": "Paso 2",
       "branches": [
           {
               "id": "Branch 1",
               "sequences": [
-                  { "formula": "signal1 = 1 AND signal2 > 3 OR signal3 > 1", "delay": 10 },
-                  { "formula": "signal4 > 3", "delay": 10 },
-                  { "formula": "signal5 <= 2", "delay": 10 }
+                  { "formula": "signal1 = 1 AND signal2 > 3 OR signal3 > 1", "delay": 10, "tiempo_alarma": 30  },
+                  { "formula": "signal4 > 3", "delay": 10, "tiempo_alarma": 30  },
+                  { "formula": "signal5 <= 2", "delay": 10, "tiempo_alarma": 30  }
 
               ]
           },
           {
               "id": "Branch 2",
               "sequences": [
-                  { "formula": "signal6 > 8", "delay": 10 }
+                  { "formula": "signal6 > 8", "delay": 10, "tiempo_alarma": 30  }
               ]
           }
       ]
   },
   {
-      "id": 3,
+      "id": "Paso 3",
       "branches": [
           {
               "id": "Branch 1",
               "sequences": [
-                  { "formula": "signal7 = 1", "delay": 10 },
-                  { "formula": "signal8 > 3", "delay": 10 }
+                  { "formula": "signal7 = 1", "delay": 10, "tiempo_alarma": 30  },
+                  { "formula": "signal8 > 3", "delay": 10, "tiempo_alarma": 30  }
               ]
           },
           {
               "id": "Branch 2",
               "sequences": [
-                  { "formula": "signal9 > 8", "delay": 10 }
+                  { "formula": "signal9 > 8", "delay": 10, "tiempo_alarma": 30  }
               ]
           },
           {
               "id": "Branch 3",
               "sequences": [
-                  { "formula": "signal10 > 8", "delay": 10 }
+                  { "formula": "signal10 > 8", "delay": 10, "tiempo_alarma": 30  }
               ]
           }
       ]
   },
   {
-      "id": 4,
+      "id": "Paso 4",
       "branches": [
           {
               "id": "Branch 1",
               "sequences": [
-                  { "formula": "signal11 < 5", "delay": 10 }
+                  { "formula": "signal11 < 5", "delay": 10, "tiempo_alarma": 30  },
+                  { "formula": "signal12 < 5", "delay": 10, "tiempo_alarma": 30  },
+                  { "formula": "signal13 < 5", "delay": 10, "tiempo_alarma": 30  },
+                  { "formula": "signal14 < 5", "delay": 10, "tiempo_alarma": 30  }
+
               ]
           }, 
           {
               "id": "Branch 2",
               "sequences": [
-                  { "formula": "signal12 > 8", "delay": 10 }
+                  { "formula": "signal15 > 8", "delay": 10, "tiempo_alarma": 30  }
               ]
           }
       ]
-  }
+  },
+  {
+      "id": "Paso 5",
+      "branches": [
+          {
+              "id": "Branch 1",
+              "sequences": [
+                  { "formula": "signal16 < 5", "delay": 10, "tiempo_alarma": 30  }
+              ]
+          }, 
+          {
+              "id": "Branch 2",
+              "sequences": [
+                  { "formula": "signal17 > 8", "delay": 10, "tiempo_alarma": 30  }
+              ]
+          }
+      ]
+  },
+  {
+  "id": "Paso 6",
+  "branches": [
+      {
+          "id": "Branch 1",
+          "sequences": [
+              { "formula": "signal18 < 5", "delay": 10, "tiempo_alarma": 30  },
+              { "formula": "signal19 < 5", "delay": 10, "tiempo_alarma": 30  },
+              { "formula": "signal20 < 5", "delay": 10, "tiempo_alarma": 30  }
+          ]
+      }, 
+      {
+          "id": "Branch 2",
+          "sequences": [
+              { "formula": "signal21 > 8", "delay": 10, "tiempo_alarma": 30  },
+              { "formula": "signal22 < 5", "delay": 10, "tiempo_alarma": 30  }
+          ]
+      }, 
+      {
+          "id": "Branch 3",
+          "sequences": [
+              { "formula": "signal21 > 8", "delay": 10, "tiempo_alarma": 30  },
+              { "formula": "signal22 < 5", "delay": 10, "tiempo_alarma": 30  }
+          ]
+      }, 
+      {
+          "id": "Branch 4",
+          "sequences": [
+              { "formula": "signal23 > 9", "delay": 10, "tiempo_alarma": 30  },
+              { "formula": "signal24 < 1", "delay": 10, "tiempo_alarma": 30  }
+          ]
+      }, 
+      {
+          "id": "Branch 5",
+          "sequences": [
+              { "formula": "signal25 > 8", "delay": 10, "tiempo_alarma": 30  },
+              { "formula": "signal26 < 5", "delay": 10, "tiempo_alarma": 30  }
+          ]
+      }
+      
+  ]
+},
+{
+    "id": "FIN",
+    "branches": [
+        {
+            "id": "Branch 1",
+            "sequences": [
+                { "formula": "signal27 < 5", "delay": 10, "tiempo_alarma": 30  }
+            ]
+        }, 
+        {
+            "id": "Branch 2",
+            "sequences": [
+                { "formula": "signal28 > 8", "delay": 10, "tiempo_alarma": 30  }
+            ]
+        }
+    ]
+}
+
+
+
+
 ]
