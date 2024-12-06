@@ -1,0 +1,134 @@
+[
+  {
+    "tag": "SAB:G1.TNH_V",
+    "filtro": "",
+    "fecha_inicial": "2022-12-04 15:40:00",
+    "fecha_final": "2022-12-04 16:40:00",
+    "intervalo_muestreo": "1s",
+    "tag_search_eventos": "SAB:G1.L89SSC",
+    "dateInput_search_eventos_inicio": "2022-12-04",
+    "dateInput_search_eventos_fin": "2022-12-06",
+    "filtro_search_eventos": "'SAB:G1.L89SSC'=\"ON\""
+  },
+  {
+    "tag": "SAB:G1.L89SSC",
+    "filtro": "",
+    "fecha_inicial": "2022-12-04 15:40:00",
+    "fecha_final": "2022-12-04 16:40:00",
+    "intervalo_muestreo": "1s",
+    "tag_search_eventos": "SAB:G1.L89SSC",
+    "dateInput_search_eventos_inicio": "2022-12-04",
+    "dateInput_search_eventos_fin": "2022-12-06",
+    "filtro_search_eventos": "'SAB:G1.L89SSC'=\"ON\""
+  },
+  {
+    "tag": "SAB:G1.L52BT1",
+    "filtro": "",
+    "fecha_inicial": "2022-12-04 15:40:00",
+    "fecha_final": "2022-12-04 16:40:00",
+    "intervalo_muestreo": "1s",
+    "tag_search_eventos": "SAB:G1.L89SSC",
+    "dateInput_search_eventos_inicio": "2022-12-04",
+    "dateInput_search_eventos_fin": "2022-12-06",
+    "filtro_search_eventos": "'SAB:G1.L89SSC'=\"ON\""
+  },
+  {
+    "tag": "SAB:G1.L52BT2",
+    "filtro": "",
+    "fecha_inicial": "2022-12-04 15:40:00",
+    "fecha_final": "2022-12-04 16:40:00",
+    "intervalo_muestreo": "1s",
+    "tag_search_eventos": "SAB:G1.L89SSC",
+    "dateInput_search_eventos_inicio": "2022-12-04",
+    "dateInput_search_eventos_fin": "2022-12-06",
+    "filtro_search_eventos": "'SAB:G1.L89SSC'=\"ON\""
+  },
+  {
+    "tag": "SAB:G1.L52BD1",
+    "filtro": "",
+    "fecha_inicial": "2022-12-04 15:40:00",
+    "fecha_final": "2022-12-04 16:40:00",
+    "intervalo_muestreo": "1s",
+    "tag_search_eventos": "SAB:G1.L89SSC",
+    "dateInput_search_eventos_inicio": "2022-12-04",
+    "dateInput_search_eventos_fin": "2022-12-06",
+    "filtro_search_eventos": "'SAB:G1.L89SSC'=\"ON\""
+  },
+  {
+    "tag": "SAB:G1.L52BD2",
+    "filtro": "",
+    "fecha_inicial": "2022-12-04 15:40:00",
+    "fecha_final": "2022-12-04 16:40:00",
+    "intervalo_muestreo": "1s",
+    "tag_search_eventos": "SAB:G1.L89SSC",
+    "dateInput_search_eventos_inicio": "2022-12-04",
+    "dateInput_search_eventos_fin": "2022-12-06",
+    "filtro_search_eventos": "'SAB:G1.L89SSC'=\"ON\""
+  },
+  {
+    "tag": "SAB:G1.L52VG1",
+    "filtro": "",
+    "fecha_inicial": "2022-12-04 15:40:00",
+    "fecha_final": "2022-12-04 16:40:00",
+    "intervalo_muestreo": "1s",
+    "tag_search_eventos": "SAB:G1.L89SSC",
+    "dateInput_search_eventos_inicio": "2022-12-04",
+    "dateInput_search_eventos_fin": "2022-12-06",
+    "filtro_search_eventos": "'SAB:G1.L89SSC'=\"ON\""
+  },
+  {
+    "tag": "SAB:G1.L52VG2",
+    "filtro": "",
+    "fecha_inicial": "2022-12-04 15:40:00",
+    "fecha_final": "2022-12-04 16:40:00",
+    "intervalo_muestreo": "1s",
+    "tag_search_eventos": "SAB:G1.L89SSC",
+    "dateInput_search_eventos_inicio": "2022-12-04",
+    "dateInput_search_eventos_fin": "2022-12-06",
+    "filtro_search_eventos": "'SAB:G1.L89SSC'=\"ON\""
+  },
+  {
+    "tag": "SAB:G1.L1X",
+    "filtro": "",
+    "fecha_inicial": "2022-12-04 15:40:00",
+    "fecha_final": "2022-12-04 16:40:00",
+    "intervalo_muestreo": "1s",
+    "tag_search_eventos": "SAB:G1.L89SSC",
+    "dateInput_search_eventos_inicio": "2022-12-04",
+    "dateInput_search_eventos_fin": "2022-12-06",
+    "filtro_search_eventos": "'SAB:G1.L89SSC'=\"ON\""
+  },
+  {
+    "tag": "SAB:G1.L52BN1",
+    "filtro": "",
+    "fecha_inicial": "2022-12-04 15:40:00",
+    "fecha_final": "2022-12-04 16:40:00",
+    "intervalo_muestreo": "1s",
+    "tag_search_eventos": "SAB:G1.L89SSC",
+    "dateInput_search_eventos_inicio": "2022-12-04",
+    "dateInput_search_eventos_fin": "2022-12-06",
+    "filtro_search_eventos": "'SAB:G1.L89SSC'=\"ON\""
+  },
+  {
+    "tag": "SAB:G1.L52BN2",
+    "filtro": "",
+    "fecha_inicial": "2022-12-04 15:40:00",
+    "fecha_final": "2022-12-04 16:40:00",
+    "intervalo_muestreo": "1s",
+    "tag_search_eventos": "SAB:G1.L89SSC",
+    "dateInput_search_eventos_inicio": "2022-12-04",
+    "dateInput_search_eventos_fin": "2022-12-06",
+    "filtro_search_eventos": "'SAB:G1.L89SSC'=\"ON\""
+  },
+  {
+    "tag": "SAB:BOP.A3.LCA54.AA091XH01",
+    "filtro": "",
+    "fecha_inicial": "2022-12-04 15:40:00",
+    "fecha_final": "2022-12-04 16:40:00",
+    "intervalo_muestreo": "1s",
+    "tag_search_eventos": "SAB:G1.L89SSC",
+    "dateInput_search_eventos_inicio": "2022-12-04",
+    "dateInput_search_eventos_fin": "2022-12-06",
+    "filtro_search_eventos": "'SAB:G1.L89SSC'=\"ON\""
+  }
+]

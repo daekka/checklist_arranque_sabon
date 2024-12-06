@@ -6,7 +6,7 @@
             {
                 "id": "Permisivos de arranque",
                 "sequences": [
-                    { "formula": "BOP.S20_SYS_RDY <=  5", "delay": 10, "tiempo_alarma": 10 }
+                    { "formula": "BOP.S20_SYS_RDY =  1", "delay": 10, "tiempo_alarma": 100 }
   
                 ]
             }
@@ -31,7 +31,21 @@
           {
               "id": "Control maestro 'Arrancar'",
               "sequences": [
-                  { "formula": "SAB:G1.L1X <= 5", "delay": 10, "tiempo_alarma": 10 }
+                  { "formula": "SAB:G1.L1X = 1", "delay": 10, "tiempo_alarma": 100 }
+
+              ]
+          }
+      ]
+   },
+
+    {
+
+      "id": "Drenajes Caldera",
+      "branches": [
+          {
+              "id": "Abiertos y en manual",
+              "sequences": [
+                  { "formula": "DUMMY = 999", "delay": 10, "tiempo_alarma": 100 }
 
               ]
           }
@@ -45,7 +59,7 @@
         {
             "id": "VERIFICAR con TNH >100 rpm",
             "sequences": [
-                { "formula": "G1.TNH_V > 5", "delay": 10, "tiempo_alarma": 10 }
+                { "formula": "G1.TNH_V > 100", "delay": 10, "tiempo_alarma": 100 }
 
             ]
         }

@@ -1,0 +1,121 @@
+[
+
+    {
+        "id": "Vista General - Secuencias - Arranque - Sec. Arranque",
+        "branches": [
+            {
+                "id": "Permisivos de arranque",
+                "sequences": [
+                    { "formula": "BOP.S20_SYS_RDY =  999", "delay": 10, "tiempo_alarma": 1000 }
+  
+                ]
+            }
+        ]
+    },
+    {
+        "id": "DESPACHO",
+        "branches": [
+            {
+                "id": "CONFIRMADA con el DCG la mejor hora para acoplar",
+                "sequences": [
+                    { "formula": "DUMMY = 999", "delay": 10, "tiempo_alarma": 10000 }
+  
+                ]
+            }
+        ]
+    },
+    {
+        "id": "Turbina - Control - Arranque",
+        "branches": [
+            {
+                "id": "Control maestro 'Arrancar'",
+                "sequences": [
+                    { "formula": "SAB:SAB:G1.L1X = 1", "delay": 10, "tiempo_alarma": 10000 }
+  
+                ]
+            },
+            {
+                "id": "ABIERTOS y en MANUAL los drenajes de caldera anexo 3",
+                "sequences": [
+                    { "formula": "DUMMY = 999", "delay": 10, "tiempo_alarma": 1000 }
+  
+                ]
+            }
+        ]
+    },
+
+      {
+        "id": "ARRANCANDO",
+        "branches": [
+            {
+                "id": "Velocidad",
+                "sequences": [
+                    { "formula": "G1.TNH_V > 668", "delay": 10, "tiempo_alarma": 1000 },
+                    { "formula": "G1.TNH_V <= 665", "delay": 10, "tiempo_alarma": 60 },
+                    { "formula": "G1.TNH_V <= 401", "delay": 10, "tiempo_alarma": 1000 },
+                    { "formula": "G1.TNH_V >= 433", "delay": 10, "tiempo_alarma": 1000 },
+                    { "formula": "G1.TNH_V <= 450", "delay": 10, "tiempo_alarma": 1000 },
+                    { "formula": "G1.TNH_V >= 2500 AND G1.L89SSC != 1", "delay": 10, "tiempo_alarma": 1000 }
+
+                ]
+            }, 
+            
+            {
+                "id": "En marcha un 88BT",
+                "sequences": [
+                    { "formula": "G1.L52BT1 = 1 OR G1.L52BT2 = 1", "delay": 10, "tiempo_alarma": 30 }
+                ]
+            } , 
+            
+            {
+                "id": "En marcha un 88BD",
+                "sequences": [
+                    { "formula": "G1.L52BD1 = 1 OR G1.L52BD2 = 1", "delay": 10, "tiempo_alarma": 30 }
+                ]
+            }, 
+            
+            {
+                "id": "En marcha un 88VG",
+                "sequences": [
+                    { "formula": "G1.L52VG1 = 1 OR G1.L52VG2 = 1", "delay": 10, "tiempo_alarma": 30 }
+                ]
+            },
+            
+            {
+                "id": "Válvula de atemperación del tanque atmosférico de drenajes de turbina de vapor y su bypass",
+                "sequences": [
+                    { "formula": " BOP.A3.LCA54.AA091XL01 = 1 AND G1.TNH_V >2995", "delay": 10, "tiempo_alarma": 30 }
+                ]
+            },
+            
+            {
+                "id": "En marcha un 88BN",
+                "sequences": [
+                    { "formula": "G1.L52BN1 = 1 OR G1.L52BN2 = 1", "delay": 10, "tiempo_alarma": 30 }
+                ]
+            },
+            
+            {
+                "id": "En marcha un 88TK",
+                "sequences": [
+                    { "formula": "G1.L52TK1 = 1 OR G1.L52TK2 = 1", "delay": 10, "tiempo_alarma": 30 }
+                ]
+            }
+            
+        ]
+    }
+    ,
+    {
+        "id": "ACOPLE",
+        "branches": [
+            {
+                "id": "Interruptor cerrado",
+                "sequences": [
+                    { "formula": "DUMMY = 999", "delay": 10, "tiempo_alarma": 10000 }
+  
+                ]
+            }
+        ]
+    }
+
+]   

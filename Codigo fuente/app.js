@@ -1,47 +1,25 @@
-const usuario_pi = "uf183530";
-const password_pi = "nov2024";
-const servidor_pi = "https://azpgenpivisio01.intranet.gasnaturalfenosa.com/piwebapi/";
-const peticion_actual = "https://azpgenpivisio01.intranet.gasnaturalfenosa.com/piwebapi/streamsets/";
-const peticion_interpolado = "https://azpgenpivisio01.intranet.gasnaturalfenosa.com/piwebapi/streams/";
-const peticion_recorded = "https://azpgenpivisio01.intranet.gasnaturalfenosa.com/piwebapi/streams/";
-const peticion_info_tag = "https://azpgenpivisio01.intranet.gasnaturalfenosa.com/piwebapi/points/";
+// Librerias
+import { leer_datos_pi, loadCSV_simulacion, findByTime } from "./lectura_datos.js";
+
+
+window.processedData = {};
+window.contador_tiempo = 0;
+await loadCSV_simulacion('./datos_simulacion_arranque.csv');
 
 
 let sequences = [];
-let signalValues = {}; // Valores actuales de las señales
+window.signalValues = {}; // Valores actuales de las señales
 let signalUpdateInterval; // Intervalo para actualizar señales
 let currentSequenceIndex = 0;
 
 // Configuración para la actualización periódica
-const signalUpdateFrequency = 5000; // Frecuencia de actualización (ms)
+const signalUpdateFrequency = 150; // Frecuencia de actualización (ms)
 
 // Cargar el sonido de beep
 const beepSound = new Audio('beep.mp3'); // Asegúrate de tener un archivo de sonido en esta ruta
 const errorSound = new Audio('error_2.wav'); // Asegúrate de tener un archivo de sonido en esta ruta
 
-// Simular lectura de señales del hardware
-function leer_datos_pi(requiredSignals = null) {
-    console.log ("Señales PI:");
-    console.log (requiredSignals);
-    valor_actual = obtenerDatosPI_actual (requiredSignals);
-    // Valores simulados de señales
-    let valores = {};
-    
-    // Si se especifican señales requeridas, solo generar esas
-    if (requiredSignals) {
-        requiredSignals.forEach(signal => {
-            valores[signal] = Math.floor(Math.random() * 11); // Genera valores entre 0 y 10
-        });
-    } else {
-        // Si no hay señales requeridas, generar algunas por defecto
-        valores = {
 
-        };
-    }
-    
-    signalValues = valores;
-    return valores;
-}
 
 // Nueva función para extraer señales de una fórmula
 function extractSignalsFromFormula(formula) {
@@ -53,7 +31,7 @@ function extractSignalsFromFormula(formula) {
 
 // Parse the formula and evaluate the condition
 function evaluateFormula(formula, frozenValues = null) {
-    const valuesToUse = frozenValues || signalValues;
+    const valuesToUse = frozenValues || window.signalValues;
     const conditions = formula.split(/(AND|OR)/);
     let result = null;
 
@@ -61,17 +39,17 @@ function evaluateFormula(formula, frozenValues = null) {
     for (let i = 0; i < conditions.length; i += 2) {
         const condition = conditions[i].trim();
         const [signal, operator, value] = condition.match(/([\w.]+)\s*(>=|<=|=|!=|>|<)\s*(\d+)/).slice(1);
-
+        let value_float = parseFloat(value);
         const signalValue = valuesToUse[signal];
         let conditionResult = false;
-
+        //console.log (signalValue);
         switch (operator) {
-            case '=': conditionResult = signalValue == value; break;
-            case '!=': conditionResult = signalValue != value; break;
-            case '>': conditionResult = signalValue > value; break;
-            case '<': conditionResult = signalValue < value; break;
-            case '>=': conditionResult = signalValue >= value; break;
-            case '<=': conditionResult = signalValue <= value; break;
+            case '=': conditionResult = signalValue == value_float; break;
+            case '!=': conditionResult = signalValue != value_float; break;
+            case '>': conditionResult = signalValue > value_float; break;
+            case '<': conditionResult = signalValue < value_float; break;
+            case '>=': conditionResult = signalValue >= value_float; break;
+            case '<=': conditionResult = signalValue <= value_float; break;
         }
 
 
@@ -277,12 +255,12 @@ function startSequence() {
                 if (formulaResult) {
                     completeSubSequence();
                 }
-            }, 5000);
+            }, signalUpdateFrequency);
 
             // Función para completar la subsecuencia
             function completeSubSequence(isManual = false) {
                 if (!frozenValues) {
-                    frozenValues = { ...signalValues };
+                    frozenValues = { ...window.signalValues };
                     clearInterval(interval);
                     
                     completeButton.style.display = 'none';
@@ -385,46 +363,3 @@ function formatTimeDifference(startTime, endTime) {
 
 
 
-async function obtenerDatosPI_actual(tag) {
-    console.log("Lanza petición a PIWEBAPI - Recorded");
-    console.log (tag);
-    const tagName = btoa("?PÏUWGEPI\\SAB:" + tag);
-    console.log (tagName);
-    try {
-        
-        //https://pvgenpiweb01.intranet.gasnaturalfenosa.com/piwebapi/streams/P1DPVVdHRVBJXFNBQjpTMS5TU0ZWX09VVA==/recorded'
-        //console.log(`${peticion_recorded}${tagName}/recorded?filterexpression=${filterexpression}?startTime=${startTime}&endTime=${endTime}`);
-        //const response = await fetch(`${peticion_recorded}${tagName}/recorded?filterexpression=${filterexpression}&startTime=${startTime}&endTime=${endTime}`, {
-            
-        //https://MyPIWebAPIServer/piwebapi/streamsets/value?webid=xxx&webid=yyy...
-
-        //const response = await fetch(`${peticion_actual}${tagName}/value`, {
-        const response = await fetch(`${peticion_actual}/value?webid=${tagName}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Basic ' + btoa(usuario_pi + ':' + password_pi),
-                'Content-Type': 'application/json'
-            }
-        });
-        
-        if (!response.ok) {
-            throw new Error('Error en la solicitud a PI Web API:', error);
-        }
-        
-        const data = await response.json();
-
-        const resultados = data.Items.map(item => ({
-            //timestamp: item.Timestamp,
-            value: item.Value,
-            //fechahora: item.Timestamp.split('T')[0] + " " + item.Timestamp.split('T')[1].split('.')[0]
-        }));
-        console.log("Consulta resuelta");
-        
-        console.log(resultados[0].value.Value);
-        return resultados[0].value.Value;
-
-    } catch (error) {
-        console.error('Error:', error);
-        throw error;
-    }
-}
